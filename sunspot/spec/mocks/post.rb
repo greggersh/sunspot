@@ -78,6 +78,10 @@ Sunspot.setup(Post) do
   string :legacy_array, :as => :legacy_array_field_sm, :multiple => true do
     ['first string', 'second string']
  	end
+ 	
+ 	text :spanish_title, :lang => "es" do |post|
+ 	  "jugando"
+ 	end
 end
 
 class PhotoPost < Post

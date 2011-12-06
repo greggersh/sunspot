@@ -122,17 +122,19 @@ module Sunspot
   #
   class FulltextField < Field #:nodoc:
     attr_reader :default_boost
-
+    attr_reader :lang
+    
     def initialize(name, options = {})
       super(name, Type::TextType.instance, options)
       @multiple = true
       @boost = options.delete(:boost)
       @default_boost = options.delete(:default_boost)
+      @lang = options.delete(:lang)
       raise ArgumentError, "Unknown field option #{options.keys.first.inspect} provided for field #{name.inspect}" unless options.empty?
     end
 
     def indexed_name
-      "#{super}"
+      "#{super}#{("_" + @lang) if @lang}"
     end
   end
 
